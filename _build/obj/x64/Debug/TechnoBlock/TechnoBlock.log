@@ -1,9 +1,1 @@
-﻿  raylib_game.c
-  screen_ending.c
-  screen_gameplay.c
-  screen_logo.c
-  screen_options.c
-  screen_title.c
-  Generating Code...
-  LINK : ..\_bin\Debug\TechnoBlock.exe not found or not built by the last incremental link; performing full link
-  TechnoBlock.vcxproj -> C:\Code\TechnoBlock\_bin\Debug\TechnoBlock.exe
+﻿  TechnoBlock.vcxproj -> C:\Code\CurrentProjects\TechnoBlock\_bin\Debug\TechnoBlock.exe
