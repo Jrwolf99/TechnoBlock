@@ -5,4 +5,5 @@
   screen_options.c
   screen_title.c
   Generating Code...
-  TechnoBlock.vcxproj -> C:\Code\CurrentProjects\TechnoBlock\_bin\Debug\TechnoBlock.exe
+  LINK : ..\_bin\Debug\TechnoBlock.exe not found or not built by the last incremental link; performing full link
+  TechnoBlock.vcxproj -> C:\Code\TechnoBlock\_bin\Debug\TechnoBlock.exe
