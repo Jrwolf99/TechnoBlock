@@ -17,14 +17,14 @@ namespace texture
 
     void LoadTextures()
     {
-        GameBox = LoadTexture("Assets/GameBox.png");
-        BlockOne = LoadTexture("Assets/BlockOne.png");
-        BlockTwo = LoadTexture("Assets/BlockTwo.png");
-        BlockThree = LoadTexture("Assets/BlockThree.png");
-        BlockFour = LoadTexture("Assets/BlockFour.png");
-        BlockFive = LoadTexture("Assets/BlockFive.png");
-        BlockSix = LoadTexture("Assets/BlockSix.png");
-        BlockSeven = LoadTexture("Assets/BlockSeven.png");
+        GameBox = LoadTexture("resources/images/GameBox.png");
+        BlockOne = LoadTexture("resources/images/BlockOne.png");
+        BlockTwo = LoadTexture("resources/images/BlockTwo.png");
+        BlockThree = LoadTexture("resources/images/BlockThree.png");
+        BlockFour = LoadTexture("resources/images/BlockFour.png");
+        BlockFive = LoadTexture("resources/images/BlockFive.png");
+        BlockSix = LoadTexture("resources/images/BlockSix.png");
+        BlockSeven = LoadTexture("resources/images/BlockSeven.png");
     }
 
 }

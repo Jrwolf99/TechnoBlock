@@ -25,4 +25,16 @@
     <ClInclude Include="src\Utility\TexturesLoad.h" />
     <ClInclude Include="src\Utility\Utility.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\BlockFive.png" />
+    <Image Include="Assets\BlockFour.png" />
+    <Image Include="Assets\BlockOne.png" />
+    <Image Include="Assets\BlockSeven.png" />
+    <Image Include="Assets\BlockSix.png" />
+    <Image Include="Assets\BlockThree.png" />
+    <Image Include="Assets\BlockTwo.png" />
+    <Image Include="Assets\GameBox.png" />
+    <Image Include="Assets\Square.png" />
+    <Image Include="Assets\Square1.png" />
+  </ItemGroup>
 </Project>
