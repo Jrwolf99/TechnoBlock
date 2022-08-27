@@ -327,7 +327,6 @@ void FallingShape::handleUserKeyInputs()
 				this->rotate(4);
 				this->rotate(4);
 				this->rotate(4);
-
 			}
 
 
