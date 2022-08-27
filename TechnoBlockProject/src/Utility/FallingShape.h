@@ -20,17 +20,18 @@ private:
 	float rotation = 0.0f;
 	bool stuck;
 
-	Vector2 rotationOrigin = {(float)posX, (float)posY};
+	Vector2 rotationOrigin = { (float)posX, (float)posY };
 
 public:
 	FallingShape(int typeOfShape);
 	~FallingShape();
 
-	void makeCoords(int coordX, int coordY, std::array<int, 2> &mySubCoord);
+	void makeCoords(int coordX, int coordY, std::array<int, 2>& mySubCoord);
 	void shiftLeft();
 	void shiftRight();
 	void shiftDown();
 
+	bool CheckForCoordsInSides();
 	bool checkForCoordsInDanger();
 	bool checkForCoordsInCorrupt();
 
@@ -38,7 +39,10 @@ public:
 	void fillMyCoordsAsRotatedCoords(std::vector<std::vector<bool>> myMatrix);
 	bool isHittingEdge(std::string side, std::vector<std::vector<bool>> myMatrix);
 	void rotate(int size);
-	
+
+	void handleKeyLeft();
+	void handleKeyRight();
+	void handleKeyUp();
 	void handleUserKeyInputs();
 	void updateDangerAndCorruptLists();
 	void update();

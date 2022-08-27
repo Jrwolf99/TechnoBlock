@@ -109,7 +109,7 @@ FallingShape::~FallingShape()
 {
 }
 
-void FallingShape::makeCoords(int coordX, int coordY, std::array<int, 2> &mySubCoord)
+void FallingShape::makeCoords(int coordX, int coordY, std::array<int, 2>& mySubCoord)
 {
 	mySubCoord[0] = coordX;
 	mySubCoord[1] = coordY;
@@ -144,7 +144,7 @@ void FallingShape::shiftRight()
 
 	this->posX++;
 
-	 
+
 	if (checkForCoordsInCorrupt())
 	{
 		this->shiftLeft();
@@ -166,6 +166,16 @@ void FallingShape::shiftDown()
 
 
 
+bool FallingShape::CheckForCoordsInSides()
+{
+	for (int i = 0; i < this->myCurrCoordsList.size(); i++)
+	{
+		if (this->myCurrCoordsList[i][0] > 9 || this->myCurrCoordsList[i][0] < 0) {
+			return true;
+		}
+	}
+	return false;
+}
 
 
 bool FallingShape::checkForCoordsInDanger()
@@ -237,20 +247,16 @@ bool FallingShape::isHittingEdge(std::string side, std::vector<std::vector<bool>
 		{
 			if (myMatrix[i][j])
 			{
-				if ((j + this->posX > 8) && (side =="Right")) {
+				if ((j + this->posX > 8) && (side == "Right")) {
 					return true;
 				}
-				if ((j + this->posX < 1)&& (side=="Left")) {
-					return true; 
+				if ((j + this->posX < 1) && (side == "Left")) {
+					return true;
 				}
 			}
 		}
 	}
-
 	return false;
-
-
-
 
 }
 
@@ -258,95 +264,93 @@ bool FallingShape::isHittingEdge(std::string side, std::vector<std::vector<bool>
 void FallingShape::rotate(int size)
 {
 	this->rotation -= 90.0f;
-	
+
 	std::vector<std::vector<bool>>  myMatrix;
 	if (size == 3)  myMatrix = { {{false,false,false},{false,false,false},{false,false,false}} };
 	if (size == 4)  myMatrix = { {{false,false,false,false},{false,false,false,false},{false,false,false,false}, {false,false,false,false}} };
 
 	assignCoordsToMatrix(myMatrix);
-	
-	myMatrix = utility::rotateMatrix(myMatrix);
-	
-	fillMyCoordsAsRotatedCoords(myMatrix);
-	
-	if (isHittingEdge("Right", myMatrix)) {
-		this->shiftLeft();
-	}
-	if (isHittingEdge("Left", myMatrix)) {
-		this->shiftRight();
-	}
 
-	
+	myMatrix = utility::rotateMatrix(myMatrix);
+
+	fillMyCoordsAsRotatedCoords(myMatrix);
 
 }
 
-void FallingShape::handleUserKeyInputs()
+
+void FallingShape::handleKeyLeft()
 {
-	bool isOutOfBoundsRight = false;
-	bool isOutOfBoundsLeft = false;
-	for (int i = 0; i < this->myCurrCoordsList.size(); i++)
-	{
-		if (myCurrCoordsList[i][0] > 8)
-		{
-			isOutOfBoundsRight = true;
-		}
-		if (myCurrCoordsList[i][0] < 1)
-		{
-			isOutOfBoundsLeft = true;
-		}
-	}
 
-	if (IsKeyPressed(KEY_RIGHT) && !isOutOfBoundsRight && !checkForCoordsInDanger())
-	{
-		this->shiftRight();
 
-		if (checkForCoordsInCorrupt())
-		{
-			this->shiftLeft();
-		}
-	}
-
-	if (IsKeyPressed(KEY_LEFT) && !isOutOfBoundsLeft && !checkForCoordsInDanger())
+	if (IsKeyPressed(KEY_LEFT) && !checkForCoordsInDanger())
 	{
 		this->shiftLeft();
-
-		if (checkForCoordsInCorrupt())
-		{
+		if (CheckForCoordsInSides()) {
 			this->shiftRight();
 		}
 	}
 
+
+}
+
+
+void FallingShape::handleKeyRight()
+{
+
+	if (IsKeyPressed(KEY_RIGHT) && !checkForCoordsInDanger())
+	{
+		this->shiftRight();
+		if (CheckForCoordsInSides()) {
+			this->shiftLeft();
+		}
+	}
+
+
+}
+
+
+
+void FallingShape::handleKeyUp()
+{
+
 	if (IsKeyPressed(KEY_UP) && this->typeOfShape != 7 && !checkForCoordsInDanger())
 	{
-
 		if (this->typeOfShape == 1)
 		{
 			this->rotate(4);
-
-			if (checkForCoordsInCorrupt()) {
+			if (checkForCoordsInCorrupt() || CheckForCoordsInSides()) {
 				this->rotate(4);
 				this->rotate(4);
 				this->rotate(4);
 			}
-
-
 			return;
 		}
 
-
-
 		this->rotate(3);
-		if (checkForCoordsInCorrupt()) {
+		if (checkForCoordsInCorrupt() || CheckForCoordsInSides())
+		{
 			this->rotate(3);
 			this->rotate(3);
 			this->rotate(3);
 		}
 
-
-
-
-
 	}
+
+}
+
+
+
+
+
+
+
+
+
+void FallingShape::handleUserKeyInputs()
+{
+	handleKeyLeft();
+	handleKeyRight();
+	handleKeyUp();
 }
 
 
@@ -357,9 +361,6 @@ void FallingShape::updateDangerAndCorruptLists()
 		coordinategrid::addNewCoordsToLists(myCurrCoordsList[i]);
 	}
 }
-
-
-
 
 void FallingShape::update()
 {
