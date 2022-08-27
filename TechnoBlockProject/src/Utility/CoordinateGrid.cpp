@@ -2,7 +2,9 @@
 
 #include "CoordinateGrid.h"
 #include "raylib.h"
+#include "../Screens/gameplay.h"
 #include "../Utility/TexturesLoad.h"
+#include "../Utility/Utility.h"
 #include <iostream>
 #include <string>
 #include <array>
@@ -17,6 +19,20 @@ namespace coordinategrid
 	std::unordered_map<std::string, bool> corruptList;
 	std::unordered_map<std::string, bool> dangerList;
 
+
+	void addNewCoordsToLists(std::array<int, 2> myCoordToAdd)
+	{
+		std::string myCorruptCoord = utility::parseArrayToString(myCoordToAdd);
+		corruptList[myCorruptCoord] = true;
+
+		std::string myDangerCoord = utility::parseArrayToString(std::array<int, 2> { myCoordToAdd[0], myCoordToAdd[1]-1});
+		dangerList[myDangerCoord] = true;
+
+	}
+
+
+
+
 	void initCoordinateGrid()
 	{
 		GameBoxPosX = GetScreenWidth() / 2 - texture::GameBox.width / 2;
@@ -24,42 +40,68 @@ namespace coordinategrid
 
 		for (int i = 0; i < 10; i++)
 		{
-
-			std::array<int, 2> myCorruptArray = {i, 20};
-			std::array<int, 2> myDangerArray = {i, 19};
-			std::string myCorruptKey = makeKey(myCorruptArray);
-			std::string myDangerKey = makeKey(myDangerArray);
-
-			corruptList[myCorruptKey] = true;
-			dangerList[myDangerKey] = true;
-
-			std::cout << myCorruptKey << " : " << corruptList[myCorruptKey] << std::endl;
-			std::cout << myDangerKey << " : " << dangerList[myDangerKey] << std::endl;
+			corruptList[utility::parseArrayToString(std::array<int, 2>  {i, 20})] = true;
+			dangerList[utility::parseArrayToString(std::array<int, 2> {i, 19})] = true;
 		}
 	}
 
-	void addNewDangerCoord(std::string myCoordStringKey)
-	{
 
-		if (dangerList[myCoordStringKey])
-			return;
+	void updateCheckForLineScore() {
+		//scan corrupt list
+		//if all 10 columns of row 19 are not filled, we know player hasn't scored
+		for (int i = 0; i < 10; i++) {
+			std::array<int, 2> myCoord = {i, 19};
+			if (!corruptList[utility::parseArrayToString(myCoord)]) {
+				return;
+			}
+		}
+		std::cout << "bottom layer SCORE!"<< std::endl;
 
-		std::cout << std::endl
-				  << "New Danger Coord Added! : " << myCoordStringKey << std::endl;
 
-		dangerList[myCoordStringKey] = true;
+		for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < 25; j++) {
+
+				std::array<int, 2> myArray = { i, j };
+				std::string myCoordsKey = utility::parseArrayToString(myArray);
+				std::cout << "CORRUPT LIST Value at : " << myCoordsKey << " : " << corruptList[myCoordsKey] << std::endl;
+
+			}
+		}
+
+
+		//shift all corruptlist and danger list coords down
+		corruptList = utility::shiftHashValuesDown(corruptList);
+		dangerList = utility::shiftHashValuesDown(dangerList);
+
+
+		for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < 25; j++) {
+
+				std::array<int, 2> myArray = { i, j };
+				std::string myCoordsKey = utility::parseArrayToString(myArray);
+				std::cout << "CORRUPT LIST Value at : " << myCoordsKey << " : " << corruptList[myCoordsKey] << std::endl;
+
+
+			}
+		}
+
+		//shift all values down of each FallingShape of the FallingShapesVector
+		for (int i = 0; i < gameplay::FallingShapesVector.size(); i++) {
+			gameplay::FallingShapesVector[i].shiftDown();
+		}
+		//somehow hide the texture below the gamebox. 
+
+
+
 	}
 
-	void addNewCorruptCoord(std::string myCoordStringKey)
-	{
-		if (corruptList[myCoordStringKey])
-			return;
 
-		std::cout << std::endl
-				  << "New Corrupt Coord Added! : " << myCoordStringKey << std::endl;
-
-		corruptList[myCoordStringKey] = true;
+	//helper
+	bool  isCoordInDanger(std::array<int, 2> myCoord) {
+		if (coordinategrid::dangerList[utility::parseArrayToString(myCoord)]) return true;
+		return false;
 	}
+
 
 	void DrawTextureInCoords(Texture2D Texture, int coordX, int coordY, float rotationAmt)
 	{
@@ -81,12 +123,9 @@ namespace coordinategrid
 		DrawTexturePro(Texture, sourceRec, destRec, rotationOrigin, rotationAmt, WHITE);
 	}
 
-	// helper functions
-	std::string makeKey(std::array<int, 2> coordArray)
-	{
-		std::string myString;
-		myString = std::to_string(coordArray[0]) + "," + std::to_string(coordArray[1]);
-		return myString;
-	}
+
+	
+
+	
 
 }

@@ -30,12 +30,17 @@ public:
 	void shiftLeft();
 	void shiftRight();
 	void shiftDown();
-	void rotateTypeOne();
-	void rotate();
-	void handleUserKeyInputs();
-	void updateDangerAndCorruptLists();
+
 	bool checkForCoordsInDanger();
 	bool checkForCoordsInCorrupt();
+
+	void assignCoordsToMatrix(std::vector<std::vector<bool>>& myMatrix);
+	void fillMyCoordsAsRotatedCoords(std::vector<std::vector<bool>> myMatrix);
+	bool isHittingEdge(std::string side, std::vector<std::vector<bool>> myMatrix);
+	void rotate(int size);
+	
+	void handleUserKeyInputs();
+	void updateDangerAndCorruptLists();
 	void update();
 	void draw();
 	std::string getCoords();

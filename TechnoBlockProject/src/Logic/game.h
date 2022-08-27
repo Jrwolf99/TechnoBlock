@@ -9,6 +9,7 @@ namespace game
 
 	extern int frames;
 	extern int secondsPassed;
+	extern int score;
 
 	void runApplication();
 	void init();

@@ -10,6 +10,9 @@ namespace game
 	const int screenHeight = 700;
 	int frames = 0;
 	int secondsPassed = 0;
+	int score = 0;
+
+
 
 	void runApplication()
 	{

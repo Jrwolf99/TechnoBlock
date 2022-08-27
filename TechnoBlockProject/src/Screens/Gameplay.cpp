@@ -35,16 +35,18 @@ namespace gameplay
 	void update()
 	{
 		FallingShapesVector[0].update();
+		coordinategrid::updateCheckForLineScore();
 		if (FallingShapesVector[0].getStuck())
 		{
-			createNewFallingShape((game::frames % 7 + 1));
+			createNewFallingShape(1);
+			//createNewFallingShape((game::frames % 7 + 1));
+			game::score++;
 		}
 	}
 
 	void draw()
 	{
 		DrawTexture(texture::GameBox, GameBoxPosX, GameBoxPosY, WHITE);
-
 		for (int i = 0; i < FallingShapesVector.size(); i++)
 		{
 			FallingShapesVector[i].draw();

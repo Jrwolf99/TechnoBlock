@@ -123,6 +123,15 @@ void FallingShape::shiftLeft()
 	}
 
 	this->posX--;
+
+
+	if (checkForCoordsInCorrupt())
+	{
+		this->shiftRight();
+	}
+
+
+
 }
 
 void FallingShape::shiftRight()
@@ -134,6 +143,14 @@ void FallingShape::shiftRight()
 	}
 
 	this->posX++;
+
+	 
+	if (checkForCoordsInCorrupt())
+	{
+		this->shiftLeft();
+	}
+
+
 }
 
 void FallingShape::shiftDown()
@@ -147,76 +164,120 @@ void FallingShape::shiftDown()
 	this->posY++;
 }
 
-void FallingShape::rotateTypeOne()
+
+
+
+
+bool FallingShape::checkForCoordsInDanger()
 {
+	for (int i = 0; i < this->myCurrCoordsList.size(); i++)
+	{
+		if (coordinategrid::isCoordInDanger(this->myCurrCoordsList[i]))
+		{
+			updateDangerAndCorruptLists();
+			this->stuck = true;
+			return true;
+		}
+	}
+	return false;
+}
 
-	this->rotation -= 90.0f;
-	std::array<std::array<bool, 4>, 4> phleb = {{{false, false, false, false},
-												 {false, false, false, false},
-												 {false, false, false, false},
-												 {false, false, false, false}}};
+bool FallingShape::checkForCoordsInCorrupt()
+{
+	for (int i = 0; i < this->myCurrCoordsList.size(); i++)
+	{
+		std::string myCoordStringKey = utility::parseArrayToString(myCurrCoordsList[i]);
+		if (coordinategrid::corruptList[myCoordStringKey])
+		{
+			std::cout << "Entered Check for Coords in Corrupt" << std::endl;
+			return true;
+		}
+	}
+	return false;
+}
 
+
+
+
+
+void FallingShape::assignCoordsToMatrix(std::vector<std::vector<bool>>& myMatrix) {
 	for (int i = 0; i < this->myCurrCoordsList.size(); i++)
 	{
 		int col = myCurrCoordsList[i][0] - this->posX;
 		int row = myCurrCoordsList[i][1] - this->posY;
-		phleb[row][col] = true;
-	}
-	phleb = utility::rotateMatrixFour(phleb);
-
-	this->myCurrCoordsList.clear();
-	for (int i = 0; i < phleb.size(); i++)
-	{
-		for (int j = 0; j < phleb[i].size(); j++)
-		{
-
-			if (phleb[i][j])
-			{
-
-				std::array<int, 2> subCoordArray = {j + this->posX, i + this->posY};
-				this->myCurrCoordsList.insert(this->myCurrCoordsList.begin(), subCoordArray);
-				if (j + this->posX > 8)
-					this->shiftLeft();
-				if (j + this->posX < 1)
-					this->shiftRight();
-			}
-		}
+		myMatrix[row][col] = true;
 	}
 }
 
-void FallingShape::rotate()
-{
 
-	this->rotation -= 90.0f;
-	std::array<std::array<bool, 3>, 3> phleb = {{{false, false, false},
-												 {false, false, false},
-												 {false, false, false}}};
-
-	for (int i = 0; i < this->myCurrCoordsList.size(); i++)
-	{
-		int col = myCurrCoordsList[i][0] - this->posX;
-		int row = myCurrCoordsList[i][1] - this->posY;
-		phleb[row][col] = true;
-	}
-	phleb = utility::rotateMatrix(phleb);
-
+void FallingShape::fillMyCoordsAsRotatedCoords(std::vector<std::vector<bool>> myMatrix) {
 	this->myCurrCoordsList.clear();
-	for (int i = 0; i < phleb.size(); i++)
+	for (int i = 0; i < myMatrix.size(); i++)
 	{
-		for (int j = 0; j < phleb[i].size(); j++)
+		for (int j = 0; j < myMatrix[i].size(); j++)
 		{
-
-			if (phleb[i][j])
+			if (myMatrix[i][j])
 			{
-				std::array<int, 2> subCoordArray = {j + this->posX, i + this->posY};
+				std::array<int, 2> subCoordArray = { j + this->posX, i + this->posY };
 				this->myCurrCoordsList.insert(this->myCurrCoordsList.begin(), subCoordArray);
-				if (j + this->posX > 8)
-					this->shiftLeft();
-				if (j + this->posX < 1)
-					this->shiftRight();
 			}
 		}
 	}
+
+
+}
+
+
+
+
+bool FallingShape::isHittingEdge(std::string side, std::vector<std::vector<bool>> myMatrix) {
+	for (int i = 0; i < myMatrix.size(); i++)
+	{
+		for (int j = 0; j < myMatrix[i].size(); j++)
+		{
+			if (myMatrix[i][j])
+			{
+				if ((j + this->posX > 8) && (side =="Right")) {
+					return true;
+				}
+				if ((j + this->posX < 1)&& (side=="Left")) {
+					return true; 
+				}
+			}
+		}
+	}
+
+	return false;
+
+
+
+
+}
+
+
+void FallingShape::rotate(int size)
+{
+	this->rotation -= 90.0f;
+	
+	std::vector<std::vector<bool>>  myMatrix;
+	if (size == 3)  myMatrix = { {{false,false,false},{false,false,false},{false,false,false}} };
+	if (size == 4)  myMatrix = { {{false,false,false,false},{false,false,false,false},{false,false,false,false}, {false,false,false,false}} };
+
+	assignCoordsToMatrix(myMatrix);
+	
+	myMatrix = utility::rotateMatrix(myMatrix);
+	
+	fillMyCoordsAsRotatedCoords(myMatrix);
+	
+	if (isHittingEdge("Right", myMatrix)) {
+		this->shiftLeft();
+	}
+	if (isHittingEdge("Left", myMatrix)) {
+		this->shiftRight();
+	}
+
+	
+
 }
 
 void FallingShape::handleUserKeyInputs()
@@ -260,69 +321,56 @@ void FallingShape::handleUserKeyInputs()
 
 		if (this->typeOfShape == 1)
 		{
-			this->rotateTypeOne();
+			this->rotate(4);
+
+			if (checkForCoordsInCorrupt()) {
+				this->rotate(4);
+				this->rotate(4);
+				this->rotate(4);
+			}
+
+
 			return;
 		}
 
-		this->rotate();
+
+
+		this->rotate(3);
+		if (checkForCoordsInCorrupt()) {
+			this->rotate(3);
+			this->rotate(3);
+			this->rotate(3);
+		}
+
+
+
+
+
 	}
 }
+
 
 void FallingShape::updateDangerAndCorruptLists()
 {
-
 	for (int i = 0; i < this->myCurrCoordsList.size(); i++)
 	{
-		std::string myCorruptKey = coordinategrid::makeKey(this->myCurrCoordsList[i]);
-		coordinategrid::addNewCorruptCoord(myCorruptKey);
-		std::array<int, 2> myDangerArray = {myCurrCoordsList[i][0], myCurrCoordsList[i][1] - 1};
-		std::string myDangerKey = coordinategrid::makeKey(myDangerArray);
-		coordinategrid::addNewDangerCoord(myDangerKey);
+		coordinategrid::addNewCoordsToLists(myCurrCoordsList[i]);
 	}
 }
 
-bool FallingShape::checkForCoordsInDanger()
-{
-	for (int i = 0; i < this->myCurrCoordsList.size(); i++)
-	{
-		std::string myCoordStringKey = coordinategrid::makeKey(myCurrCoordsList[i]);
-		if (coordinategrid::dangerList[myCoordStringKey])
-		{
-			updateDangerAndCorruptLists();
-			this->stuck = true;
-			return true;
-		}
-	}
-	return false;
-}
 
-bool FallingShape::checkForCoordsInCorrupt()
-{
-	for (int i = 0; i < this->myCurrCoordsList.size(); i++)
-	{
-		std::string myCoordStringKey = coordinategrid::makeKey(myCurrCoordsList[i]);
-		if (coordinategrid::corruptList[myCoordStringKey])
-		{
-			return true;
-		}
-	}
-	return false;
-}
+
 
 void FallingShape::update()
 {
-	if ((game::frames % 20) == 0 && !checkForCoordsInDanger())
+	if ((game::frames % 10) == 0 && !checkForCoordsInDanger())
 	{
-
 		this->shiftDown();
 	}
 	this->handleUserKeyInputs();
 }
 
-void FallingShape::draw()
-{
-	coordinategrid::DrawTextureInCoords(this->myTexture, this->posX, this->posY, this->rotation);
-}
+
 
 std::string FallingShape::getCoords()
 {
@@ -335,4 +383,9 @@ bool FallingShape::getStuck()
 	return this->stuck;
 }
 
-// helper functions------------
+
+//draw functions
+void FallingShape::draw()
+{
+	coordinategrid::DrawTextureInCoords(this->myTexture, this->posX, this->posY, this->rotation);
+}
