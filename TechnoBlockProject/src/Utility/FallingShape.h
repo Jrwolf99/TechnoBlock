@@ -23,6 +23,7 @@ private:
 	Vector2 rotationOrigin = { (float)posX, (float)posY };
 
 public:
+
 	FallingShape(int typeOfShape);
 	~FallingShape();
 
@@ -44,9 +45,11 @@ public:
 	void handleKeyRight();
 	void handleKeyUp();
 	void handleUserKeyInputs();
+
 	void updateDangerAndCorruptLists();
 	void update();
 	void draw();
+
 	std::string getCoords();
 	bool getStuck();
 

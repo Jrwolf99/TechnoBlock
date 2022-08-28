@@ -16,6 +16,7 @@
     <ClCompile Include="src\Utility\TexturesLoad.cpp" />
     <ClCompile Include="src\Utility\Utility.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Utility\debug.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Logic\game.h" />
@@ -24,6 +25,7 @@
     <ClInclude Include="src\Utility\FallingShape.h" />
     <ClInclude Include="src\Utility\TexturesLoad.h" />
     <ClInclude Include="src\Utility\Utility.h" />
+    <ClInclude Include="src\Utility\debug.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\BlockFive.png" />

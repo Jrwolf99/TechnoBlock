@@ -13,11 +13,12 @@ namespace coordinategrid
 	extern int GameBoxPosY;
 	extern std::unordered_map<std::string, bool> corruptList;
 	extern std::unordered_map<std::string, bool> dangerList;
-	void DrawTextureInCoords(Texture2D, int, int, float rotationAmt);
 	void addNewCoordsToLists(std::array<int, 2> myCoordToAdd);
 	void updateCheckForLineScore();
 	void initCoordinateGrid();
-	bool isCoordInDanger(std::array<int,2> myCoord);
+	bool isCoordInDanger(std::array<int, 2> myCoord);
+	bool isCoordInCorrupt(std::array<int, 2> myCoord);
+	void DrawTextureInCoords(Texture2D, int, int, float rotationAmt);
 
 
 }

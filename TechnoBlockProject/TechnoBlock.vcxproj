@@ -178,6 +178,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Screens\Gameplay.cpp" />
     <ClCompile Include="src\Utility\CoordinateGrid.cpp" />
+    <ClCompile Include="src\Utility\debug.cpp" />
     <ClCompile Include="src\Utility\FallingShape.cpp" />
     <ClCompile Include="src\Utility\TexturesLoad.cpp" />
     <ClCompile Include="src\Utility\Utility.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="src\Logic\game.h" />
     <ClInclude Include="src\Screens\Gameplay.h" />
     <ClInclude Include="src\Utility\CoordinateGrid.h" />
+    <ClInclude Include="src\Utility\debug.h" />
     <ClInclude Include="src\Utility\FallingShape.h" />
     <ClInclude Include="src\Utility\TexturesLoad.h" />
     <ClInclude Include="src\Utility\Utility.h" />

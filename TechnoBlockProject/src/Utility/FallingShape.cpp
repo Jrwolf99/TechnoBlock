@@ -17,12 +17,9 @@
 FallingShape::FallingShape(int typeOfShape)
 {
 	this->typeOfShape = typeOfShape;
-
 	this->posX = 4;
 	this->posY = 0;
-
 	this->stuck = false;
-
 	std::array<int, 2> subCoord1;
 	std::array<int, 2> subCoord2;
 	std::array<int, 2> subCoord3;
@@ -162,9 +159,8 @@ void FallingShape::shiftDown()
 	}
 
 	this->posY++;
+
 }
-
-
 
 bool FallingShape::CheckForCoordsInSides()
 {
@@ -176,7 +172,6 @@ bool FallingShape::CheckForCoordsInSides()
 	}
 	return false;
 }
-
 
 bool FallingShape::checkForCoordsInDanger()
 {
@@ -199,16 +194,11 @@ bool FallingShape::checkForCoordsInCorrupt()
 		std::string myCoordStringKey = utility::parseArrayToString(myCurrCoordsList[i]);
 		if (coordinategrid::corruptList[myCoordStringKey])
 		{
-			std::cout << "Entered Check for Coords in Corrupt" << std::endl;
 			return true;
 		}
 	}
 	return false;
 }
-
-
-
-
 
 void FallingShape::assignCoordsToMatrix(std::vector<std::vector<bool>>& myMatrix) {
 	for (int i = 0; i < this->myCurrCoordsList.size(); i++)
@@ -238,8 +228,6 @@ void FallingShape::fillMyCoordsAsRotatedCoords(std::vector<std::vector<bool>> my
 }
 
 
-
-
 bool FallingShape::isHittingEdge(std::string side, std::vector<std::vector<bool>> myMatrix) {
 	for (int i = 0; i < myMatrix.size(); i++)
 	{
@@ -264,15 +252,11 @@ bool FallingShape::isHittingEdge(std::string side, std::vector<std::vector<bool>
 void FallingShape::rotate(int size)
 {
 	this->rotation -= 90.0f;
-
 	std::vector<std::vector<bool>>  myMatrix;
 	if (size == 3)  myMatrix = { {{false,false,false},{false,false,false},{false,false,false}} };
 	if (size == 4)  myMatrix = { {{false,false,false,false},{false,false,false,false},{false,false,false,false}, {false,false,false,false}} };
-
 	assignCoordsToMatrix(myMatrix);
-
 	myMatrix = utility::rotateMatrix(myMatrix);
-
 	fillMyCoordsAsRotatedCoords(myMatrix);
 
 }
@@ -315,6 +299,7 @@ void FallingShape::handleKeyUp()
 
 	if (IsKeyPressed(KEY_UP) && this->typeOfShape != 7 && !checkForCoordsInDanger())
 	{
+
 		if (this->typeOfShape == 1)
 		{
 			this->rotate(4);
@@ -337,12 +322,6 @@ void FallingShape::handleKeyUp()
 	}
 
 }
-
-
-
-
-
-
 
 
 

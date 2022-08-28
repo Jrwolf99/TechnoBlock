@@ -3,8 +3,11 @@
 #include "CoordinateGrid.h"
 #include "raylib.h"
 #include "../Screens/gameplay.h"
-#include "../Utility/TexturesLoad.h"
-#include "../Utility/Utility.h"
+
+#include "TexturesLoad.h"
+#include "Utility.h"
+#include "debug.h"
+
 #include <iostream>
 #include <string>
 #include <array>
@@ -25,13 +28,10 @@ namespace coordinategrid
 		std::string myCorruptCoord = utility::parseArrayToString(myCoordToAdd);
 		corruptList[myCorruptCoord] = true;
 
-		std::string myDangerCoord = utility::parseArrayToString(std::array<int, 2> { myCoordToAdd[0], myCoordToAdd[1]-1});
+		std::string myDangerCoord = utility::parseArrayToString(std::array<int, 2> { myCoordToAdd[0], myCoordToAdd[1] - 1});
 		dangerList[myDangerCoord] = true;
 
 	}
-
-
-
 
 	void initCoordinateGrid()
 	{
@@ -40,65 +40,55 @@ namespace coordinategrid
 
 		for (int i = 0; i < 10; i++)
 		{
-			corruptList[utility::parseArrayToString(std::array<int, 2>  {i, 20})] = true;
-			dangerList[utility::parseArrayToString(std::array<int, 2> {i, 19})] = true;
+
+			addNewCoordsToLists(std::array<int, 2>  {i, 20});
 		}
 	}
 
 
+
+
+
+
+	bool checkForFullBottomLine() {
+		for (int row = 0; row < 10; row++) {
+			if (!isCoordInCorrupt(std::array<int, 2> {row, 19})) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+
+
+
 	void updateCheckForLineScore() {
-		//scan corrupt list
-		//if all 10 columns of row 19 are not filled, we know player hasn't scored
-		for (int i = 0; i < 10; i++) {
-			std::array<int, 2> myCoord = {i, 19};
-			if (!corruptList[utility::parseArrayToString(myCoord)]) {
-				return;
-			}
-		}
-		std::cout << "bottom layer SCORE!"<< std::endl;
 
-
-		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 25; j++) {
-
-				std::array<int, 2> myArray = { i, j };
-				std::string myCoordsKey = utility::parseArrayToString(myArray);
-				std::cout << "CORRUPT LIST Value at : " << myCoordsKey << " : " << corruptList[myCoordsKey] << std::endl;
-
-			}
+		if (checkForFullBottomLine()) {
+			return;
 		}
 
-
-		//shift all corruptlist and danger list coords down
-		corruptList = utility::shiftHashValuesDown(corruptList);
-		dangerList = utility::shiftHashValuesDown(dangerList);
-
-
-		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 25; j++) {
-
-				std::array<int, 2> myArray = { i, j };
-				std::string myCoordsKey = utility::parseArrayToString(myArray);
-				std::cout << "CORRUPT LIST Value at : " << myCoordsKey << " : " << corruptList[myCoordsKey] << std::endl;
-
-
-			}
-		}
-
-		//shift all values down of each FallingShape of the FallingShapesVector
+		std::cout << "bottom layer SCORE!" << std::endl;
+		corruptList.clear();
+		dangerList.clear();
 		for (int i = 0; i < gameplay::FallingShapesVector.size(); i++) {
 			gameplay::FallingShapesVector[i].shiftDown();
+			gameplay::FallingShapesVector[i].updateDangerAndCorruptLists();
 		}
 		//somehow hide the texture below the gamebox. 
-
-
 
 	}
 
 
 	//helper
 	bool  isCoordInDanger(std::array<int, 2> myCoord) {
-		if (coordinategrid::dangerList[utility::parseArrayToString(myCoord)]) return true;
+		if (dangerList[utility::parseArrayToString(myCoord)]) return true;
+		return false;
+	}
+
+	bool  isCoordInCorrupt(std::array<int, 2> myCoord) {
+		if (corruptList[utility::parseArrayToString(myCoord)]) return true;
 		return false;
 	}
 
@@ -109,7 +99,7 @@ namespace coordinategrid
 		float correctedX = (float)(GameBoxPosX + 67 + (27 * coordX));
 		float correctedY = (float)(GameBoxPosY + 66 + (27 * coordY));
 
-		Vector2 rotationOrigin = {(float)(Texture.width / 2.0f), (float)Texture.height / 2.0f};
+		Vector2 rotationOrigin = { (float)(Texture.width / 2.0f), (float)Texture.height / 2.0f };
 
 		if (Texture.width > 90.0f)
 		{ // this is block one
@@ -117,15 +107,15 @@ namespace coordinategrid
 			correctedY = (float)(GameBoxPosY + 80 + (27 * coordY));
 		}
 
-		Rectangle sourceRec = {0.0f, 0.0f, (float)Texture.width, (float)Texture.height};
-		Rectangle destRec = {correctedX, correctedY, (float)Texture.width, (float)Texture.height};
+		Rectangle sourceRec = { 0.0f, 0.0f, (float)Texture.width, (float)Texture.height };
+		Rectangle destRec = { correctedX, correctedY, (float)Texture.width, (float)Texture.height };
 
 		DrawTexturePro(Texture, sourceRec, destRec, rotationOrigin, rotationAmt, WHITE);
 	}
 
 
-	
 
-	
+
+
 
 }
