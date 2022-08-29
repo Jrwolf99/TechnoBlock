@@ -46,10 +46,6 @@ namespace coordinategrid
 	}
 
 
-
-
-
-
 	bool checkForFullBottomLine() {
 		for (int row = 0; row < 10; row++) {
 			if (!isCoordInCorrupt(std::array<int, 2> {row, 19})) {
@@ -58,9 +54,6 @@ namespace coordinategrid
 		}
 		return false;
 	}
-
-
-
 
 
 	void updateCheckForLineScore() {
@@ -112,10 +105,5 @@ namespace coordinategrid
 
 		DrawTexturePro(Texture, sourceRec, destRec, rotationOrigin, rotationAmt, WHITE);
 	}
-
-
-
-
-
 
 }
