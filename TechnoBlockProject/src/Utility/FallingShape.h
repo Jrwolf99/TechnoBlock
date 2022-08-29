@@ -35,7 +35,6 @@ public:
 	bool CheckForCoordsInSides();
 	bool checkForCoordsInDanger();
 	bool checkForCoordsInCorrupt();
-
 	void assignCoordsToMatrix(std::vector<std::vector<bool>>& myMatrix);
 	void fillMyCoordsAsRotatedCoords(std::vector<std::vector<bool>> myMatrix);
 	bool isHittingEdge(std::string side, std::vector<std::vector<bool>> myMatrix);
@@ -44,6 +43,7 @@ public:
 	void handleKeyLeft();
 	void handleKeyRight();
 	void handleKeyUp();
+	void handleKeySpace();
 	void handleUserKeyInputs();
 
 	void updateDangerAndCorruptLists();
@@ -51,6 +51,7 @@ public:
 	void draw();
 
 	std::string getCoords();
+	int getY();
 	bool getStuck();
 
 	std::array<std::array<bool, 3>, 3> rotateMatrix(std::array<std::array<bool, 3>, 3> mat);

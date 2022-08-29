@@ -160,6 +160,9 @@ void FallingShape::shiftDown()
 
 	this->posY++;
 
+
+
+
 }
 
 bool FallingShape::CheckForCoordsInSides()
@@ -296,32 +299,41 @@ void FallingShape::handleKeyRight()
 
 void FallingShape::handleKeyUp()
 {
-
-	if (IsKeyPressed(KEY_UP) && this->typeOfShape != 7 && !checkForCoordsInDanger())
+	if (!IsKeyPressed(KEY_UP) || this->typeOfShape == 7 || checkForCoordsInDanger()) return;
+	if (this->typeOfShape == 1)
 	{
-
-		if (this->typeOfShape == 1)
-		{
+		this->rotate(4);
+		if (checkForCoordsInCorrupt() || CheckForCoordsInSides()) {
 			this->rotate(4);
-			if (checkForCoordsInCorrupt() || CheckForCoordsInSides()) {
-				this->rotate(4);
-				this->rotate(4);
-				this->rotate(4);
-			}
-			return;
+			this->rotate(4);
+			this->rotate(4);
 		}
+		return;
+	}
 
+	this->rotate(3);
+	if (checkForCoordsInCorrupt() || CheckForCoordsInSides())
+	{
 		this->rotate(3);
-		if (checkForCoordsInCorrupt() || CheckForCoordsInSides())
-		{
-			this->rotate(3);
-			this->rotate(3);
-			this->rotate(3);
-		}
-
+		this->rotate(3);
+		this->rotate(3);
 	}
 
 }
+
+
+
+void FallingShape::handleKeySpace() {
+	if (IsKeyPressed(KEY_SPACE)) {
+		PlaySound(texture::boom);
+
+		for (int i = 0; i < 20; i++) {
+			if (checkForCoordsInDanger()) return;
+			this->shiftDown();
+		}
+	}
+}
+
 
 
 
@@ -330,6 +342,8 @@ void FallingShape::handleUserKeyInputs()
 	handleKeyLeft();
 	handleKeyRight();
 	handleKeyUp();
+	handleKeySpace();
+
 }
 
 
@@ -343,7 +357,7 @@ void FallingShape::updateDangerAndCorruptLists()
 
 void FallingShape::update()
 {
-	if ((game::frames % 10) == 0 && !checkForCoordsInDanger())
+	if ((game::frames % 20) == 0 && !checkForCoordsInDanger())
 	{
 		this->shiftDown();
 	}
@@ -356,12 +370,24 @@ std::string FallingShape::getCoords()
 {
 	std::string myString = std::to_string(this->posX) + "," + std::to_string(this->posY);
 	return myString;
+
 }
+
+
+
+int FallingShape::getY()
+{
+	return this->posY;
+}
+
+
 
 bool FallingShape::getStuck()
 {
 	return this->stuck;
 }
+
+
 
 
 //draw functions

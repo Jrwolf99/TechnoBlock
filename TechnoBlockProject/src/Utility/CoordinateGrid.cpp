@@ -35,9 +35,6 @@ namespace coordinategrid
 
 	void initCoordinateGrid()
 	{
-		GameBoxPosX = GetScreenWidth() / 2 - texture::GameBox.width / 2;
-		GameBoxPosY = GetScreenHeight() / 2 - texture::GameBox.height / 2;
-
 		for (int i = 0; i < 10; i++)
 		{
 
@@ -88,6 +85,12 @@ namespace coordinategrid
 
 	void DrawTextureInCoords(Texture2D Texture, int coordX, int coordY, float rotationAmt)
 	{
+
+
+		GameBoxPosX = GetScreenWidth() / 2 - texture::GameBox.width / 2;
+		GameBoxPosY = GetScreenHeight() / 2 - texture::GameBox.height / 2;
+
+
 
 		float correctedX = (float)(GameBoxPosX + 67 + (27 * coordX));
 		float correctedY = (float)(GameBoxPosY + 66 + (27 * coordY));
