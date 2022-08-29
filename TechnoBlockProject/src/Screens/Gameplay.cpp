@@ -33,7 +33,11 @@ namespace gameplay
 	void update()
 	{
 		FallingShapesVector[0].update();
-		coordinategrid::updateCheckForLineScore();
+
+
+		coordinategrid::scanLinesForScore();
+
+
 		if (FallingShapesVector[0].getStuck())
 		{
 

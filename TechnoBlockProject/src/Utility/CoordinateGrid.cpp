@@ -43,19 +43,19 @@ namespace coordinategrid
 	}
 
 
-	bool checkForFullBottomLine() {
-		for (int row = 0; row < 10; row++) {
-			if (!isCoordInCorrupt(std::array<int, 2> {row, 19})) {
-				return true;
+	bool checkForFullLine(int rowNumber) {
+		for (int col = 0; col < 10; col++) {
+			if (!isCoordInCorrupt(std::array<int, 2> {col, rowNumber})) {
+				return false;
 			}
 		}
-		return false;
+		return true;
 	}
 
 
-	void updateCheckForLineScore() {
+	void updateCheckForLineScore(int rowNumber) {
 
-		if (checkForFullBottomLine()) {
+		if (!checkForFullLine(rowNumber)) {
 			return;
 		}
 
@@ -69,6 +69,17 @@ namespace coordinategrid
 		//somehow hide the texture below the gamebox. 
 
 	}
+
+
+	void scanLinesForScore() {
+
+		for (int row = 0; row < 20; row++) {
+			updateCheckForLineScore(row);
+		}
+
+
+	}
+
 
 
 	//helper
