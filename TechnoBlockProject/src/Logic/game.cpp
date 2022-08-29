@@ -39,7 +39,7 @@ namespace game
 		InitWindow(0, 0, "Block Game! by Jonathan Wolf");
 		InitAudioDevice();
 		texture::LoadTextures();
-		//PlaySound(texture::song);
+		PlaySound(texture::song);
 		SetTargetFPS(60);
 		SetConfigFlags(FLAG_MSAA_4X_HINT);
 		gameplay::init();

@@ -15,6 +15,7 @@ namespace texture
 	extern Texture2D Tekno;
 	extern Sound song;
 	extern Sound boom;
+	extern Sound boomLarge;
 	void LoadTextures();
 
 }

@@ -40,9 +40,8 @@ namespace gameplay
 
 		if (FallingShapesVector[0].getStuck())
 		{
-
-			createNewFallingShape(1);
-			//createNewFallingShape((game::frames % 7 + 1));
+			//createNewFallingShape(1);
+			createNewFallingShape((game::frames % 7 + 1));
 			game::score = game::score + 8;
 
 			if (FallingShapesVector[0].getY() == FallingShapesVector[1].getY()) {

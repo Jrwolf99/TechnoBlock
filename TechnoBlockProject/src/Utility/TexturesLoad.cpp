@@ -18,6 +18,7 @@ namespace texture
 
 	Sound song;
 	Sound boom;
+	Sound boomLarge;
 
 	void LoadTextures()
 	{
@@ -33,6 +34,7 @@ namespace texture
 
 		song = LoadSound("resources/sounds/song.wav");
 		boom = LoadSound("resources/sounds/boom.wav");
+		boomLarge = LoadSound("resources/sounds/boomlarge.wav");
 
 	}
 

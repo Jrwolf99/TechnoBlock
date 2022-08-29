@@ -3,6 +3,7 @@
 #include "CoordinateGrid.h"
 #include "raylib.h"
 #include "../Screens/gameplay.h"
+#include "../Logic/game.h"
 
 #include "TexturesLoad.h"
 #include "Utility.h"
@@ -59,14 +60,18 @@ namespace coordinategrid
 			return;
 		}
 
-		std::cout << "bottom layer SCORE!" << std::endl;
+		std::cout << "SCORE!" << std::endl;
+
+		PlaySound(texture::boomLarge);
+		game::score += 8;
+
+
 		corruptList.clear();
 		dangerList.clear();
 		for (int i = 0; i < gameplay::FallingShapesVector.size(); i++) {
 			gameplay::FallingShapesVector[i].shiftDown();
 			gameplay::FallingShapesVector[i].updateDangerAndCorruptLists();
 		}
-		//somehow hide the texture below the gamebox. 
 
 	}
 
