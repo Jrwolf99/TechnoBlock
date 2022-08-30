@@ -30,6 +30,7 @@ FallingShape::FallingShape(int typeOfShape)
 
 		std::cout << "case 1!" << std::endl;
 		this->myTexture = texture::BlockOne;
+		this->myTextureGhost = texture::BlockOneGhost;
 		makeCoords(this->posX + 1, this->posY + 0, subCoord1);
 		makeCoords(this->posX + 1, this->posY + 1, subCoord2);
 		makeCoords(this->posX + 1, this->posY + 2, subCoord3);
@@ -40,6 +41,7 @@ FallingShape::FallingShape(int typeOfShape)
 	{
 		std::cout << "case 2!" << std::endl;
 		this->myTexture = texture::BlockTwo;
+		this->myTextureGhost = texture::BlockTwoGhost;
 		makeCoords(this->posX + 2, this->posY + 1, subCoord1);
 		makeCoords(this->posX + 1, this->posY + 0, subCoord2);
 		makeCoords(this->posX + 0, this->posY + 1, subCoord3);
@@ -50,6 +52,7 @@ FallingShape::FallingShape(int typeOfShape)
 	{
 		std::cout << "case 3!" << std::endl;
 		this->myTexture = texture::BlockThree;
+		this->myTextureGhost = texture::BlockThreeGhost;
 		makeCoords(this->posX + 1, this->posY + 0, subCoord1);
 		makeCoords(this->posX + 2, this->posY + 0, subCoord2);
 		makeCoords(this->posX + 1, this->posY + 1, subCoord3);
@@ -60,6 +63,7 @@ FallingShape::FallingShape(int typeOfShape)
 	{
 		std::cout << "case 4!" << std::endl;
 		this->myTexture = texture::BlockFour;
+		this->myTextureGhost = texture::BlockFourGhost;
 		makeCoords(this->posX + 0, this->posY + 0, subCoord1);
 		makeCoords(this->posX + 1, this->posY + 0, subCoord2);
 		makeCoords(this->posX + 1, this->posY + 1, subCoord3);
@@ -71,6 +75,7 @@ FallingShape::FallingShape(int typeOfShape)
 
 		std::cout << "case 5!" << std::endl;
 		this->myTexture = texture::BlockFive;
+		this->myTextureGhost = texture::BlockFiveGhost;
 		makeCoords(this->posX + 0, this->posY + 2, subCoord1);
 		makeCoords(this->posX + 0, this->posY + 1, subCoord2);
 		makeCoords(this->posX + 1, this->posY + 2, subCoord3);
@@ -81,6 +86,7 @@ FallingShape::FallingShape(int typeOfShape)
 	{
 		std::cout << "case 6!" << std::endl;
 		this->myTexture = texture::BlockSix;
+		this->myTextureGhost = texture::BlockSixGhost;
 		makeCoords(this->posX + 2, this->posY + 1, subCoord1);
 		makeCoords(this->posX + 2, this->posY + 2, subCoord2);
 		makeCoords(this->posX + 0, this->posY + 2, subCoord3);
@@ -91,6 +97,7 @@ FallingShape::FallingShape(int typeOfShape)
 	{
 		std::cout << "case 7!" << std::endl;
 		this->myTexture = texture::BlockSeven;
+		this->myTextureGhost = texture::BlockSevenGhost;
 		makeCoords(this->posX + 0, this->posY + 0, subCoord1);
 		makeCoords(this->posX + 1, this->posY + 0, subCoord2);
 		makeCoords(this->posX + 0, this->posY + 1, subCoord3);
@@ -390,8 +397,81 @@ bool FallingShape::getStuck()
 
 
 
+int FallingShape::calculateDistanceToDrop() {
+
+
+
+	int lowestYpos = 0;
+	for (int i = 0; i < this->myCurrCoordsList.size(); i++) {
+		int myY = this->myCurrCoordsList[i][1];
+		if (myY > lowestYpos) lowestYpos = myY;
+	}
+
+
+
+
+	int distanceToDrop = 0;
+	for (int i = 20; i >= 0; i--) {
+		for (int j = 0; j < this->myCurrCoordsList.size(); j++)
+		{
+			if (coordinategrid::isCoordInDanger(std::array<int, 2> {j, i})) {
+				distanceToDrop = i;
+			}
+		}
+
+
+	}
+
+	return distanceToDrop;
+
+	/*
+
+	int result;
+
+
+	//find lowest Y coord in mycurrcorrdslist
+
+
+
+
+
+
+
+	//find highest dangerCoord under the block
+
+	int highestDangerY = 20;
+	for (int i = 0; i < this->myCurrCoordsList.size(); i++)
+	{
+		int myX = this->myCurrCoordsList[i][0];
+		for (int j = 20; j >= 0; j--) {
+			if (coordinategrid::dangerList[utility::parseArrayToString(std::array<int, 2>{ myX, j })]) {
+				highestDangerY = j;
+			}
+		}
+
+	}
+
+
+
+	return highestDangerY;
+
+	*/
+	//return -1;
+}
+
+
+
+
 //draw functions
 void FallingShape::draw()
 {
 	coordinategrid::DrawTextureInCoords(this->myTexture, this->posX, this->posY, this->rotation);
+
+	if (!this->stuck) {
+		coordinategrid::DrawTextureInCoords(this->myTextureGhost, this->posX, calculateDistanceToDrop(), this->rotation);
+	}
+
+
+
+
 }

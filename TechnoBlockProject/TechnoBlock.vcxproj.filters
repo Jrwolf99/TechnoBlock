@@ -26,7 +26,6 @@
     <ClInclude Include="src\Utility\FallingShape.h" />
     <ClInclude Include="src\Utility\TexturesLoad.h" />
     <ClInclude Include="src\Utility\Utility.h" />
-    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\images\BlockFive.png" />
@@ -40,6 +39,13 @@
     <Image Include="resources\images\Square.png" />
     <Image Include="resources\images\Square1.png" />
     <Image Include="resources\images\Tekno.png" />
+    <Image Include="resources\images\BlockFiveGhost.png" />
+    <Image Include="resources\images\BlockFourGhost.png" />
+    <Image Include="resources\images\BlockOneGhost.png" />
+    <Image Include="resources\images\BlockSevenGhost.png" />
+    <Image Include="resources\images\BlockSixGhost.png" />
+    <Image Include="resources\images\BlockThreeGhost.png" />
+    <Image Include="resources\images\BlockTwoGhost.png" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="resources\sounds\boom.wav" />
@@ -47,11 +53,5 @@
     <Media Include="resources\sounds\boomold.wav" />
     <Media Include="resources\sounds\song.mp3" />
     <Media Include="resources\sounds\song.wav" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="TechnoBlock.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="TechnoBlock.aps" />
   </ItemGroup>
 </Project>

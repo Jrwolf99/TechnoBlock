@@ -184,7 +184,6 @@
     <ClCompile Include="src\Utility\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="resource.h" />
     <ClInclude Include="src\Logic\game.h" />
     <ClInclude Include="src\Screens\Gameplay.h" />
     <ClInclude Include="src\Utility\CoordinateGrid.h" />
@@ -195,12 +194,19 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\images\BlockFive.png" />
+    <Image Include="resources\images\BlockFiveGhost.png" />
     <Image Include="resources\images\BlockFour.png" />
+    <Image Include="resources\images\BlockFourGhost.png" />
     <Image Include="resources\images\BlockOne.png" />
+    <Image Include="resources\images\BlockOneGhost.png" />
     <Image Include="resources\images\BlockSeven.png" />
+    <Image Include="resources\images\BlockSevenGhost.png" />
     <Image Include="resources\images\BlockSix.png" />
+    <Image Include="resources\images\BlockSixGhost.png" />
     <Image Include="resources\images\BlockThree.png" />
+    <Image Include="resources\images\BlockThreeGhost.png" />
     <Image Include="resources\images\BlockTwo.png" />
+    <Image Include="resources\images\BlockTwoGhost.png" />
     <Image Include="resources\images\GameBox.png" />
     <Image Include="resources\images\Square.png" />
     <Image Include="resources\images\Square1.png" />
@@ -212,12 +218,6 @@
     <Media Include="resources\sounds\boomold.wav" />
     <Media Include="resources\sounds\song.mp3" />
     <Media Include="resources\sounds\song.wav" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="TechnoBlock.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="TechnoBlock.aps" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -15,6 +15,7 @@ private:
 	std::vector<std::array<int, 2>> myCurrCoordsList;
 
 	Texture2D myTexture;
+	Texture2D myTextureGhost;
 	int posX;
 	int posY;
 	float rotation = 0.0f;
@@ -48,6 +49,8 @@ public:
 
 	void updateDangerAndCorruptLists();
 	void update();
+
+	int calculateDistanceToDrop();
 	void draw();
 
 	std::string getCoords();
