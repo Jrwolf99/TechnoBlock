@@ -399,64 +399,30 @@ bool FallingShape::getStuck()
 
 int FallingShape::calculateDistanceToDrop() {
 
+	//scan through each coord of the block
+	//in each cord there is a col, and scan each row of that col, and find distance from the closest danger block below, and that cord. 
 
+	//return the smallest. 
 
-	int lowestYpos = 0;
+	int currMinDistance = 20;
 	for (int i = 0; i < this->myCurrCoordsList.size(); i++) {
-		int myY = this->myCurrCoordsList[i][1];
-		if (myY > lowestYpos) lowestYpos = myY;
-	}
 
+		int blockX = this->myCurrCoordsList[i][0];
+		int blockY = this->myCurrCoordsList[i][1];
 
-
-
-	int distanceToDrop = 0;
-	for (int i = 20; i >= 0; i--) {
-		for (int j = 0; j < this->myCurrCoordsList.size(); j++)
-		{
-			if (coordinategrid::isCoordInDanger(std::array<int, 2> {j, i})) {
-				distanceToDrop = i;
+		int dangerY = 0;
+		for (int row = blockY; row < 20; row++) {
+			if (coordinategrid::isCoordInDanger(std::array<int, 2> {blockX, row})) {
+				dangerY = row;
+				break;
 			}
 		}
-
-
+		if ((dangerY - blockY) < currMinDistance) currMinDistance = (dangerY - blockY);
 	}
 
-	return distanceToDrop;
-
-	/*
-
-	int result;
+	return currMinDistance;
 
 
-	//find lowest Y coord in mycurrcorrdslist
-
-
-
-
-
-
-
-	//find highest dangerCoord under the block
-
-	int highestDangerY = 20;
-	for (int i = 0; i < this->myCurrCoordsList.size(); i++)
-	{
-		int myX = this->myCurrCoordsList[i][0];
-		for (int j = 20; j >= 0; j--) {
-			if (coordinategrid::dangerList[utility::parseArrayToString(std::array<int, 2>{ myX, j })]) {
-				highestDangerY = j;
-			}
-		}
-
-	}
-
-
-
-	return highestDangerY;
-
-	*/
-	//return -1;
 }
 
 
@@ -468,7 +434,7 @@ void FallingShape::draw()
 	coordinategrid::DrawTextureInCoords(this->myTexture, this->posX, this->posY, this->rotation);
 
 	if (!this->stuck) {
-		coordinategrid::DrawTextureInCoords(this->myTextureGhost, this->posX, calculateDistanceToDrop(), this->rotation);
+		coordinategrid::DrawTextureInCoords(this->myTextureGhost, this->posX, this->posY + calculateDistanceToDrop(), this->rotation);
 	}
 
 
