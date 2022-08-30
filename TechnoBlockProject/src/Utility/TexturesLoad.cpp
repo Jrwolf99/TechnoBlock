@@ -15,6 +15,18 @@ namespace texture
 	Texture2D BlockSix;
 	Texture2D BlockSeven;
 
+
+	Image GameBoxImage;
+	Image BlockOneImage;
+	Image BlockTwoImage;
+	Image BlockThreeImage;
+	Image BlockFourImage;
+	Image BlockFiveImage;
+	Image BlockSixImage;
+	Image BlockSevenImage;
+
+
+
 	Texture2D GameBoxGhost;
 	Texture2D BlockOneGhost;
 	Texture2D BlockTwoGhost;
@@ -26,6 +38,7 @@ namespace texture
 
 
 	Texture2D Tekno;
+	Image TeknoImage;
 
 
 	Wave songWave;
@@ -39,40 +52,65 @@ namespace texture
 
 	void LoadTextures()
 	{
-		GameBox = LoadTexture("./TechnoBlockProject/resources/images/GameBox.png");
-		BlockOne = LoadTexture("./TechnoBlockProject/resources/images/BlockOne.png");
-		BlockTwo = LoadTexture("./TechnoBlockProject/resources/images/BlockTwo.png");
-		BlockThree = LoadTexture("./TechnoBlockProject/resources/images/BlockThree.png");
-		BlockFour = LoadTexture("./TechnoBlockProject/resources/images/BlockFour.png");
-		BlockFive = LoadTexture("TechnoBlockProject/resources/images/BlockFive.png");
-		BlockSix = LoadTexture("./TechnoBlockProject/resources/images/BlockSix.png");
-		BlockSeven = LoadTexture("./TechnoBlockProject/resources/images/BlockSeven.png");
-		Tekno = LoadTexture("./TechnoBlockProject/resources/images/Tekno.png");
-
-
-		BlockOneGhost = LoadTexture("./TechnoBlockProject/resources/images/BlockOneGhost.png");
-		BlockTwoGhost = LoadTexture("./TechnoBlockProject/resources/images/BlockTwoGhost.png");
-		BlockThreeGhost = LoadTexture("./TechnoBlockProject/resources/images/BlockThreeGhost.png");
-		BlockFourGhost = LoadTexture("./TechnoBlockProject/resources/images/BlockFourGhost.png");
-		BlockFiveGhost = LoadTexture("TechnoBlockProject/resources/images/BlockFiveGhost.png");
-		BlockSixGhost = LoadTexture("./TechnoBlockProject/resources/images/BlockSixGhost.png");
-		BlockSevenGhost = LoadTexture("./TechnoBlockProject/resources/images/BlockSevenGhost.png");
 
 
 
+		/*	GameBoxImage = LoadImage("./TechnoBlockProject/resources/images/GameBox.png");
+			BlockOneImage = LoadImage("./TechnoBlockProject/resources/images/BlockOne.png");
+			BlockTwoImage = LoadImage("./TechnoBlockProject/resources/images/BlockTwo.png");
+			BlockThreeImage = LoadImage("./TechnoBlockProject/resources/images/BlockThree.png");
+			BlockFourImage = LoadImage("./TechnoBlockProject/resources/images/BlockFour.png");
+			BlockFiveImage = LoadImage("TechnoBlockProject/resources/images/BlockFive.png");
+			BlockSixImage = LoadImage("./TechnoBlockProject/resources/images/BlockSix.png");
+			BlockSevenImage = LoadImage("./TechnoBlockProject/resources/images/BlockSeven.png");
+			TeknoImage = LoadImage("./TechnoBlockProject/resources/images/Tekno.png");*/
 
-		songWave = LoadWave("./TechnoBlockProject/resources/sounds/song.wav");
-		boomWave = LoadWave("./TechnoBlockProject/resources/sounds/boom.wav");
-		boomLargeWave = LoadWave("./TechnoBlockProject/resources/sounds/boomlarge.wav");
+
+
+		GameBoxImage = LoadImage("resources/images/GameBox.png");
+		BlockOneImage = LoadImage("resources/images/BlockOne.png");
+		BlockTwoImage = LoadImage("resources/images/BlockTwo.png");
+		BlockThreeImage = LoadImage("resources/images/BlockThree.png");
+		BlockFourImage = LoadImage("resources/images/BlockFour.png");
+		BlockFiveImage = LoadImage("resources/images/BlockFive.png");
+		BlockSixImage = LoadImage("resources/images/BlockSix.png");
+		BlockSevenImage = LoadImage("resources/images/BlockSeven.png");
+		TeknoImage = LoadImage("resources/images/Tekno.png");
+
+
+
+
+		GameBox = LoadTextureFromImage(GameBoxImage);
+		BlockOne = LoadTextureFromImage(BlockOneImage);
+		BlockTwo = LoadTextureFromImage(BlockTwoImage);
+		BlockThree = LoadTextureFromImage(BlockThreeImage);
+		BlockFour = LoadTextureFromImage(BlockFourImage);
+		BlockFive = LoadTextureFromImage(BlockFiveImage);
+		BlockSix = LoadTextureFromImage(BlockSixImage);
+		BlockSeven = LoadTextureFromImage(BlockSevenImage);
+		Tekno = LoadTextureFromImage(TeknoImage);
+
+
+
+
+
+
+		BlockOneGhost = LoadTexture("resources/images/BlockOneGhost.png");
+		BlockTwoGhost = LoadTexture("resources/images/BlockTwoGhost.png");
+		BlockThreeGhost = LoadTexture("resources/images/BlockThreeGhost.png");
+		BlockFourGhost = LoadTexture("resources/images/BlockFourGhost.png");
+		BlockFiveGhost = LoadTexture("resources/images/BlockFiveGhost.png");
+		BlockSixGhost = LoadTexture("resources/images/BlockSixGhost.png");
+		BlockSevenGhost = LoadTexture("resources/images/BlockSevenGhost.png");
+
+
+		songWave = LoadWave("resources/sounds/song.wav");
+		boomWave = LoadWave("resources/sounds/boom.wav");
+		boomLargeWave = LoadWave("resources/sounds/boomlarge.wav");
 
 		song = LoadSoundFromWave(songWave);
 		boom = LoadSoundFromWave(boomWave);
 		boomLarge = LoadSoundFromWave(boomLargeWave);
-
-
-
-
-
 
 
 	}

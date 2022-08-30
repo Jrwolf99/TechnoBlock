@@ -15,6 +15,17 @@ namespace texture
 	extern Texture2D Tekno;
 
 
+
+	extern Image GameBoxImage;
+	extern Image BlockOneImage;
+	extern Image BlockTwoImage;
+	extern Image BlockThreeImage;
+	extern Image BlockFourImage;
+	extern Image BlockFiveImage;
+	extern Image BlockSixImage;
+	extern Image BlockSevenImage;
+
+
 	extern Texture2D GameBoxGhost;
 	extern Texture2D BlockOneGhost;
 	extern Texture2D BlockTwoGhost;
