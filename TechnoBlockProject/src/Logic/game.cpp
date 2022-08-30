@@ -63,7 +63,6 @@ namespace game
 			DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), BLACK);
 			DrawText("------ GAME OVER ------", GetScreenWidth() / 2 - MeasureText("------ GAVE OVER ------", 24) / 2, GetScreenHeight() / 2, 24, WHITE);
 
-
 			auto myScore = std::to_string(game::score);
 			const char* myChar = myScore.c_str();
 
@@ -77,6 +76,8 @@ namespace game
 	}
 	void deInit()
 	{
+
+
 		CloseAudioDevice();
 		CloseWindow();
 	}

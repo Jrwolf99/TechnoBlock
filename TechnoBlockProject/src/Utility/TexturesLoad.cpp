@@ -22,19 +22,19 @@ namespace texture
 
 	void LoadTextures()
 	{
-		GameBox = LoadTexture("resources/images/GameBox.png");
-		BlockOne = LoadTexture("resources/images/BlockOne.png");
-		BlockTwo = LoadTexture("resources/images/BlockTwo.png");
-		BlockThree = LoadTexture("resources/images/BlockThree.png");
-		BlockFour = LoadTexture("resources/images/BlockFour.png");
-		BlockFive = LoadTexture("resources/images/BlockFive.png");
-		BlockSix = LoadTexture("resources/images/BlockSix.png");
-		BlockSeven = LoadTexture("resources/images/BlockSeven.png");
-		Tekno = LoadTexture("resources/images/Tekno.png");
+		GameBox = LoadTexture("./TechnoBlockProject/resources/images/GameBox.png");
+		BlockOne = LoadTexture("./TechnoBlockProject/resources/images/BlockOne.png");
+		BlockTwo = LoadTexture("./TechnoBlockProject/resources/images/BlockTwo.png");
+		BlockThree = LoadTexture("./TechnoBlockProject/resources/images/BlockThree.png");
+		BlockFour = LoadTexture("./TechnoBlockProject/resources/images/BlockFour.png");
+		BlockFive = LoadTexture("TechnoBlockProject/resources/images/BlockFive.png");
+		BlockSix = LoadTexture("./TechnoBlockProject/resources/images/BlockSix.png");
+		BlockSeven = LoadTexture("./TechnoBlockProject/resources/images/BlockSeven.png");
+		Tekno = LoadTexture("./TechnoBlockProject/resources/images/Tekno.png");
 
-		song = LoadSound("resources/sounds/song.wav");
-		boom = LoadSound("resources/sounds/boom.wav");
-		boomLarge = LoadSound("resources/sounds/boomlarge.wav");
+		song = LoadSound("./TechnoBlockProject/resources/sounds/song.wav");
+		boom = LoadSound("./TechnoBlockProject/resources/sounds/boom.wav");
+		boomLarge = LoadSound("./TechnoBlockProject/resources/sounds/boomlarge.wav");
 
 	}
 

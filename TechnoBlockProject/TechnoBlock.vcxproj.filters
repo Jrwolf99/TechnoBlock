@@ -9,34 +9,49 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Logic\game.cpp" />
     <ClCompile Include="src\Screens\Gameplay.cpp" />
     <ClCompile Include="src\Utility\CoordinateGrid.cpp" />
+    <ClCompile Include="src\Utility\debug.cpp" />
     <ClCompile Include="src\Utility\FallingShape.cpp" />
     <ClCompile Include="src\Utility\TexturesLoad.cpp" />
     <ClCompile Include="src\Utility\Utility.cpp" />
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\Utility\debug.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Logic\game.h" />
     <ClInclude Include="src\Screens\Gameplay.h" />
     <ClInclude Include="src\Utility\CoordinateGrid.h" />
+    <ClInclude Include="src\Utility\debug.h" />
     <ClInclude Include="src\Utility\FallingShape.h" />
     <ClInclude Include="src\Utility\TexturesLoad.h" />
     <ClInclude Include="src\Utility\Utility.h" />
-    <ClInclude Include="src\Utility\debug.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Assets\BlockFive.png" />
-    <Image Include="Assets\BlockFour.png" />
-    <Image Include="Assets\BlockOne.png" />
-    <Image Include="Assets\BlockSeven.png" />
-    <Image Include="Assets\BlockSix.png" />
-    <Image Include="Assets\BlockThree.png" />
-    <Image Include="Assets\BlockTwo.png" />
-    <Image Include="Assets\GameBox.png" />
-    <Image Include="Assets\Square.png" />
-    <Image Include="Assets\Square1.png" />
+    <Image Include="resources\images\BlockFive.png" />
+    <Image Include="resources\images\BlockFour.png" />
+    <Image Include="resources\images\BlockOne.png" />
+    <Image Include="resources\images\BlockSeven.png" />
+    <Image Include="resources\images\BlockSix.png" />
+    <Image Include="resources\images\BlockThree.png" />
+    <Image Include="resources\images\BlockTwo.png" />
+    <Image Include="resources\images\GameBox.png" />
+    <Image Include="resources\images\Square.png" />
+    <Image Include="resources\images\Square1.png" />
+    <Image Include="resources\images\Tekno.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="resources\sounds\boom.wav" />
+    <Media Include="resources\sounds\boomlarge.wav" />
+    <Media Include="resources\sounds\boomold.wav" />
+    <Media Include="resources\sounds\song.mp3" />
+    <Media Include="resources\sounds\song.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TechnoBlock.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TechnoBlock.aps" />
   </ItemGroup>
 </Project>

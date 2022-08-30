@@ -184,6 +184,7 @@
     <ClCompile Include="src\Utility\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="src\Logic\game.h" />
     <ClInclude Include="src\Screens\Gameplay.h" />
     <ClInclude Include="src\Utility\CoordinateGrid.h" />
@@ -193,16 +194,30 @@
     <ClInclude Include="src\Utility\Utility.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Assets\BlockFive.png" />
-    <Image Include="Assets\BlockFour.png" />
-    <Image Include="Assets\BlockOne.png" />
-    <Image Include="Assets\BlockSeven.png" />
-    <Image Include="Assets\BlockSix.png" />
-    <Image Include="Assets\BlockThree.png" />
-    <Image Include="Assets\BlockTwo.png" />
-    <Image Include="Assets\GameBox.png" />
-    <Image Include="Assets\Square.png" />
-    <Image Include="Assets\Square1.png" />
+    <Image Include="resources\images\BlockFive.png" />
+    <Image Include="resources\images\BlockFour.png" />
+    <Image Include="resources\images\BlockOne.png" />
+    <Image Include="resources\images\BlockSeven.png" />
+    <Image Include="resources\images\BlockSix.png" />
+    <Image Include="resources\images\BlockThree.png" />
+    <Image Include="resources\images\BlockTwo.png" />
+    <Image Include="resources\images\GameBox.png" />
+    <Image Include="resources\images\Square.png" />
+    <Image Include="resources\images\Square1.png" />
+    <Image Include="resources\images\Tekno.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="resources\sounds\boom.wav" />
+    <Media Include="resources\sounds\boomlarge.wav" />
+    <Media Include="resources\sounds\boomold.wav" />
+    <Media Include="resources\sounds\song.mp3" />
+    <Media Include="resources\sounds\song.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TechnoBlock.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TechnoBlock.aps" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
